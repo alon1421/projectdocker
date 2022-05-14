@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/ python
 val = input("Enter your value: ")
 print(val)
 file = open('/home/read.txt', 'w')
