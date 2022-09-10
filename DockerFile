@@ -1,0 +1,5 @@
+FROM alpine:3.5
+RUN apk update
+RUN apk add --no-cache python3 git bash
+RUN mkdir -p /home/alon
+WORKDIR /home/alon
