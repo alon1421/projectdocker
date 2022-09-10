@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ ! "$(docker ps -q -f name=alpcon)" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=alpcon)" ]; then
+        docker rm alpcon
+	docker rmi -f alpcon:latest 
+    fi
+    docker build -t alpcon:latest . 
+    docker run -td --name alpcon alpcon:latest
+    docker exec -d alpcon git clone https://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:x-oauth-basic@github.com/alon1421/projectdocker.git
+    docker exec -d alpcon bash "chmod 777 /home/alon/projectdocker/script.py"
+    docker exec -d alpcon bash -c "python3 /home/alon/projectdocker/script.py"
+    docker exec -d alpcon bash -c "sleep 10"
+    docker exec -d alpcon bash -c "bash /home/alon/projectdocker/checkpro.sh"
+    docker stop alpcon
+    echo "done"
+fi
